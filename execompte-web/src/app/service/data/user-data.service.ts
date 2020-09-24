@@ -63,11 +63,11 @@ export class UserDataService {
   constructor(private http:HttpClient) { }
 
   signup(signUpInfo: SignUpInfo) {
-    return this.http.post(`http://localhost:8080/api/users`, signUpInfo,
+    return this.http.post(`http://localhost:4200/api/users`, signUpInfo,
     { observe: 'response', responseType: 'json'});
   }
 
   updateUserCompany(username, company: Company) {
-    return this.http.put(`http://localhost:8080/api/users/${username}`, company);
+    return this.http.put(`http://localhost:4200/api/users/${username}`, company);
   }
 }
