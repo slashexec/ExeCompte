@@ -1,0 +1,21 @@
+#1 Creating admin user with (pwd:_tadidi) from mongo shell
+use admin
+db.createUser(
+  {
+    user: "tamboyah",
+    pwd: passwordPrompt(),
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+  }
+)
+
+
+#2 Stop mongod and Exit mongo shell
+
+#3 Enable the security.authorization in mongod.cfg configuration file setting
+security:
+	authorization: enabled
+	
+#4 Connect and authenticate as the user administrator
+mongo --port 27017  --authenticationDatabase "admin" -u "tamboyah" -p
+
+or connect first and then authenticate: db.auth("tamboyah", passwordPrompt())

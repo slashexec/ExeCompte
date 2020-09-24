@@ -1,0 +1,45 @@
+<h4>Billing for {{ activityReport.periodStartDate | date: 'yyyy-MM' }}</h4>
+<form>
+    <div class="form-group">
+        <label for="prestation">Prestation description</label>
+        <input type="email" class="form-control" id="prestation" name="prestation" aria-describedby="prestationHelp"
+            [(ngModel)]="activityReport.prestation">
+        <small id="prestationHelp" class="form-text text-muted">Ex: Abdoulaye DRAME - Projet OpenStat AtoS</small>
+    </div>
+
+    <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input type="number" class="form-control" id="quantity" name="quantity" aria-describedby="quantityHelp" 
+        [disabled]="id != -1" [(ngModel)]="activityReport.periodTotalTime">
+        <small id="quantityHelp" class="form-text text-muted">Ex: Number of days effectively worked</small>
+    </div>
+
+    <div class="form-group">
+        <label for="unitPrice">Unit Price</label>
+        <input type="number" class="form-control" id="unitPrice" name="unitPrice" aria-describedby="unitPriceHelp" 
+        [ngModel]="activityReport.unitPrice" 
+        (ngModelChange)="unitPriceChanged($event)"
+        >
+        <small id="unitPriceHelp" class="form-text text-muted">Average daily rate (Taux Journalier Moyen).</small>
+    </div>
+
+    <table class="table">
+        <thead>
+            <th>Prestation</th>
+            <th>Total HT</th>
+            <th>TVA (20%)</th>
+            <th>Total TTC</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{activityReport.prestation}}</td>
+                <td>{{activityReport.totalHT | currency: 'EUR'}}</td>
+                <td>{{activityReport.totalTVA | currency: 'EUR'}}</td>
+                <td>{{activityReport.totalTTC | currency: 'EUR'}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary" (click)="billActivityReport()">Validate</button>
+
+</form>

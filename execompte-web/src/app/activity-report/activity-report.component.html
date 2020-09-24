@@ -1,0 +1,51 @@
+<div class="alert alert-success" role="alert"> welcome {{username}} !</div>
+
+<form>
+    <div class="form-group">
+        <label for="period-month-input">Period</label>
+        <input class="form-control" type="month" 
+            [ngModel]="activityReport.periodStartDate | date: 'yyyy-MM'" 
+            (ngModelChange)="periodChanged($event)"
+            name="period" [disabled]="id != -1"
+            id="period-month-input">
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="saveActivityReport()">
+        Validate <span class="badge badge-light">{{activityReport.periodTotalTime}} day(s)</span>
+    </button>
+
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" name="hideWeekEnds" [(ngModel)]="hideWeekEnds">
+        <label class="form-check-label" for="hideWeekEnds">Hide week ends</label>
+    </div>
+
+    <div class="form-group">
+        <table class="table">
+            <thead>
+                <th>Day</th>
+                <th>Telework ({{activityReport.periodTotalTeleWorkTime}})</th>
+                <th>Time</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let periodDay of activityReport.periodDays | periodDayFilter: hideWeekEnds">
+                    <td>{{periodDay.day | date: 'fullDate'}}</td>
+                    <td>
+                        <input type="checkbox" 
+                            [(ngModel)]="periodDay.telework"
+                            name="telework-{{periodDay.day | date: 'y-M-d'}}"
+                            (change)="recomputeTotalDays()">
+                    </td>
+                    <td>
+                        <input type="text" [(ngModel)]="periodDay.time" name="time-{{periodDay.day | date: 'y-M-d'}}"
+                            (change)="recomputeTotalDays()">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="saveActivityReport()">
+        Validate <span class="badge badge-light">{{activityReport.periodTotalTime}} day(s)</span>
+    </button>
+
+</form>

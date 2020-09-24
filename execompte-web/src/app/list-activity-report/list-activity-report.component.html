@@ -1,0 +1,40 @@
+<div class="alert alert-success" role="alert"> Activity report for: {{username}} !</div>
+
+
+<button type="submit" class="btn btn-primary btn-lg btn-block" (click)="addActivityReport()" >
+    Create
+</button>
+
+<table class="table">
+    <thead>
+        <th>Period</th>
+        <th>periodTotalTime</th>
+        <th>periodTotalBusinessTime</th>
+        <th>periodTotalTeleWorkTime</th>
+        <th>Billing</th>
+        <th>Actions</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let activityReport of activityReports">
+            <td>{{activityReport.periodStartDate | date: 'MMMM yyyy'}}</td>
+            <td>{{activityReport.periodTotalTime }}</td>
+            <td>{{activityReport.periodTotalBusinessTime }}</td>
+            <td>{{activityReport.periodTotalTeleWorkTime }}</td>
+            <td>
+                <button class="btn btn-success" *ngIf="!activityReport.billed" (click)="billActivityReport(activityReport.id)">
+                    Bill
+                </button>
+
+                <button class="btn btn-success" *ngIf="activityReport.billed" (click)="downloadBillForActivityReport(activityReport.id)">
+                    Download
+                </button>
+
+            </td>
+            <td>
+                    <button class="btn btn-primary" (click)="editActivityReport(activityReport.id)">Edit</button>
+                    &nbsp;
+                    <button class="btn btn-danger" (click)="deleteActivityReport(activityReport.id)">Remove</button>                
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,38 @@
+<header>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <!-- BRAND -->
+    <a class="navbar-brand" href="#">ExeCompte</a>
+
+    <!-- OTHER MENUS -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item active" *ngIf="isUserLoggedIn()">
+                <a class="nav-link" routerLink="/list-activity-report">Activity report <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item" *ngIf="isUserLoggedIn()">
+                <a class="nav-link" routerLink="/vente">Billing</a>
+            </li>
+
+        </ul>
+
+        <!-- LOGIN LOGOUT -->
+        <ul class="navbar-nav justify-content-end">
+            
+            <li class="nav-item" *ngIf="!isUserLoggedIn()">
+                <a class="nav-link" routerLink="/login">login</a>
+            </li>
+
+            <li class="nav-item" *ngIf="isUserLoggedIn()">
+                <a class="nav-link" routerLink="/logout">logout</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+</header>

@@ -1,0 +1,11 @@
+<h1>Welcome to Execompte!</h1>
+
+<div class="container">
+    Click here to create a account
+    <button (click)="signup()" class="btn btn-primary">Create an account</button>
+</div>
+
+<div class="container" *ngIf="welcomeMessageFromService">
+    <h2>Your welcome message from Service</h2>
+    {{welcomeMessageFromService}}
+</div>

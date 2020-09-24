@@ -1,0 +1,70 @@
+<h1> Company information</h1>
+<form>
+
+    <div class="form-group">
+        <label for="name">Company Name</label>
+        <input type="text" class="form-control" id="name" name="name"
+            [(ngModel)]="company.name">
+    </div>
+
+    <div class="form-group">
+        <label for="legalStatus">Legal status</label>        
+        <select class="form-control" id="legalStatus"  name="legalStatus" [(ngModel)]="company.legalStatus">
+            <option *ngFor="let legalStatus of keys(legalStatuses)" 
+                [ngValue]="legalStatus">
+                  {{legalStatuses[legalStatus]}}
+            </option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="siren">SIREN</label>
+        <input type="text" class="form-control" id="siren" name="siren"
+            [(ngModel)]="company.siren">
+    </div>
+
+    <div class="form-group">
+        <label for="siret">SIRET</label>
+        <input type="text" class="form-control" id="siret" name="siret"
+            [(ngModel)]="company.siret">
+    </div>
+
+    <div class="form-group">
+        <label for="siret">VAT Nummber</label>
+        <input type="text" class="form-control" id="vatNumber" name="vatNumber"
+            [(ngModel)]="company.vatNumber">
+    </div>
+
+    <!--Address-->
+    <div class="form-group">
+        <label for="addressStreet">Street</label>
+        <input type="text" class="form-control" id="addressStreet" name="addressStreet" 
+            [(ngModel)]="company.address.street">
+    </div>
+    <div class="form-group">
+        <label for="addressZipCode">Zip code</label>
+        <input type="text" class="form-control" id="addressZipCode" name="addressZipCode" 
+            [(ngModel)]="company.address.zipCode">
+    </div>
+    <div class="form-group">
+        <label for="addressCity">City</label>
+        <input type="text" class="form-control" id="addressCity" name="addressCity" 
+            [(ngModel)]="company.address.city">
+    </div>
+
+
+    <div class="form-group">
+        <label for="tel">Tel</label>
+        <input type="tel" class="form-control" id="tel" name="tel" 
+            [(ngModel)]="company.tel">
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" 
+            [(ngModel)]="company.email">
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="saveCompany()">
+        Save
+    </button>
+</form>

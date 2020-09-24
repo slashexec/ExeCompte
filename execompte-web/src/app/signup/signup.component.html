@@ -1,0 +1,26 @@
+<div class="alert alert-danger" role="alert" *ngIf="invalidSignup"> {{errorMessage}}</div>
+<form>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="userName" name="userName" aria-describedby="emailHelp"
+            [(ngModel)]="signUpInfo.userName">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" 
+            [(ngModel)]="signUpInfo.password">
+    </div>
+
+    <div class="form-group">
+        <label for="passwordConfirmation">Password confirmation</label>
+        <input type="password" class="form-control" id="passwordConfirmation" name="passwordConfirmation" 
+            [(ngModel)]="signUpInfo.passwordConfirmation">
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="signup()">
+        Sign up
+    </button>
+</form>
