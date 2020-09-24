@@ -1,14 +1,16 @@
+image:
+  file: .gitpod.dockerfile
 tasks:
   - init: |
       cd ./execompte-web
       npm install
     command: >
       npm install -g @angular/cli &&
-      ng serve &&
-      'echo "execompte-web initialized"'
+      ng serve
   - init: |
       cd ./execompte-api
       mvn clean install -Dmaven.test.skip=true
     command: >
-      'echo "execompte-api initialized"' &&
+      mkdir -p /workspace/data &&
+      mongod --dbpath /workspace/data &&
       mvn spring-boot:run
