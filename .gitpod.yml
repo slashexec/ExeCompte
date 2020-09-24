@@ -1,5 +1,14 @@
 image:
   file: .gitpod.dockerfile
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    addCheck: true
+    addComment: false
+    addLabel: prebuild-in-gitpod
 tasks:
   - init: |
       cd ./execompte-web
@@ -8,13 +17,20 @@ tasks:
       npm install -g @angular/cli &&
       ng analytics off &&
       ng serve --host 0.0.0.0 --disable-host-check
+      ng serve --proxy-config proxy.config.json --host 0.0.0.0 --disable-host-check --port 4200
   - init: |
       cd ./execompte-api
       mvn clean install -Dmaven.test.skip=true
     command: >
       mkdir -p /workspace/data &&
-      mongod --dbpath /workspace/data &&
-      gp sync-done MongoDbInit
+      mongod --dbpath /workspace/data
   - command: >
-      gp sync-await MongoDbInit &&
+      gp await-port 27017 &&
       mvn spring-boot:run
+ports:
+  - port: 27017
+    onOpen: ignore
+  - port: 8080
+    onOpen: ignore
+  - port: 4200
+    onOpen: open-browser

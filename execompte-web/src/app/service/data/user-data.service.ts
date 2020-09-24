@@ -48,7 +48,7 @@ export class User {
     public id: string,
     public userName: string,
     public password: string,
-    public createdDate: Date, 
+    public createdDate: Date,
     public company: Company,
     public bankInfo: BankInfo,
     public customers: Company[]
@@ -62,12 +62,12 @@ export class UserDataService {
 
   constructor(private http:HttpClient) { }
 
-  signup(signUpInfo: SignUpInfo) {  
-    return this.http.post(`http://localhost:8080/users`, signUpInfo, 
+  signup(signUpInfo: SignUpInfo) {
+    return this.http.post(`http://localhost:8080/api/users`, signUpInfo,
     { observe: 'response', responseType: 'json'});
   }
 
-  updateUserCompany(username, company: Company) {  
-    return this.http.put(`http://localhost:8080/users/${username}`, company);
+  updateUserCompany(username, company: Company) {
+    return this.http.put(`http://localhost:8080/api/users/${username}`, company);
   }
 }
