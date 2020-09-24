@@ -22,11 +22,20 @@ tasks:
       mvn clean install -Dmaven.test.skip=true
     command: >
       mkdir -p /workspace/data &&
-      mongo admin --host localhost --eval "db.createUser({user: 'tamboyah', pwd: '_tadidi', roles: [{role: 'userAdminAnyDatabase', db: 'admin'}, "readWriteAnyDatabase"]});" &&
+      #start mongod without auth to create user
+      mongod --dbpath /workspace/data &&
+      #start mongod WITH auth (after shutdown below)
       mongod --auth --dbpath /workspace/data
   - command: >
       gp await-port 27017 &&
       cd ./execompte-api &&
+      #create user
+      mongo execompte_db --host localhost --eval "db.createUser({user: 'tamboyah', pwd: '_tadidi', roles: [{role: 'userAdminAnyDatabase', db: 'admin'}]});" &&
+      #shutdown mongod
+      mongo execompte_db --host localhost --eval "db.adminCommand( { shutdown: 1 } );" &&
+      #Wait for mongod
+      gp await-port 27017 &&
+      #run spring-boot
       mvn spring-boot:run
 ports:
   - port: 27017
