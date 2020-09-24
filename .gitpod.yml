@@ -1,12 +1,10 @@
 tasks:
-  - init: |
-      cd execompte-web
-      npm install
-      npm install -g @angular/cli
+  - init: cd ./execompte-web
+    command: npm install
+    command: npm install -g @angular/cli
     command: ng serve
     command: 'echo "execompte-web initialized"'
-  - init: |
-      cd execompte-api
-      mvn clean install -Dmaven.test.skip=true
+  - init: cd ./execompte-api
+    command: mvn clean install -Dmaven.test.skip=true
     command: 'echo "execompte-api initialized"'
     command: mvn spring-boot:run
