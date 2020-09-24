@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "execompte"
+  "defaultProject": "execompte",
+  "cli": {
+    "analytics": false
+  }
 }
