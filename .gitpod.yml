@@ -6,6 +6,7 @@ tasks:
       npm install
     command: >
       npm install -g @angular/cli &&
+      ng analytics off &&
       ng serve
   - init: |
       cd ./execompte-api
