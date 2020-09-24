@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.slashexec.facturation.model.User;
+
+import java.util.List;
+
 import com.slashexec.facturation.model.Company;
 import com.slashexec.facturation.model.SignUpInfo;
 
@@ -26,6 +29,10 @@ public class UserService {
 	
 	public User findByUserName(String userName) {
 		return userRepository.findByUserName(userName).orElse(null);
+    }
+
+    public List<User> findAll() {
+		return userRepository.findAll();
 	}
 
 	public User save(User user) {

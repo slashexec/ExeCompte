@@ -1,6 +1,7 @@
 package com.slashexec.facturation.controller.user;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -40,6 +41,11 @@ public class UserController {
 		respHeaders.add(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.LOCATION);
 		
 		return new ResponseEntity<User> (createdUser, respHeaders, HttpStatus.CREATED);
+    }
+    
+    @GetMapping("/users")
+	public List<User> getUsers() {
+		return userService.findAll();
 	}
 	
 	@GetMapping("/users/{id}")

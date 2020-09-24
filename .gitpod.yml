@@ -16,16 +16,17 @@ tasks:
     command: >
       npm install -g @angular/cli &&
       ng analytics off &&
-      ng serve --host 0.0.0.0 --disable-host-check
       ng serve --proxy-config proxy.config.json --host 0.0.0.0 --disable-host-check --port 4200
   - init: |
       cd ./execompte-api
       mvn clean install -Dmaven.test.skip=true
     command: >
       mkdir -p /workspace/data &&
-      mongod --dbpath /workspace/data
+      mongo admin --host localhost --eval "db.createUser({user: 'tamboyah', pwd: '_tadidi', roles: [{role: 'userAdminAnyDatabase', db: 'admin'}, "readWriteAnyDatabase"]});" &&
+      mongod --auth --dbpath /workspace/data
   - command: >
       gp await-port 27017 &&
+      cd ./execompte-api &&
       mvn spring-boot:run
 ports:
   - port: 27017
