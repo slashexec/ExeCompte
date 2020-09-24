@@ -7,11 +7,14 @@ tasks:
     command: >
       npm install -g @angular/cli &&
       ng analytics off &&
-      ng serve
+      ng serve --host 0.0.0.0 --disable-host-check
   - init: |
       cd ./execompte-api
       mvn clean install -Dmaven.test.skip=true
     command: >
       mkdir -p /workspace/data &&
       mongod --dbpath /workspace/data &&
+      gp sync-done MongoDbInit
+  - command: >
+      gp sync-await MongoDbInit &&
       mvn spring-boot:run
