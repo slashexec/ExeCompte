@@ -10,32 +10,21 @@ github:
     addComment: false
     addLabel: prebuild-in-gitpod
 tasks:
+  - before: ./setup.sh
   - init: |
       cd ./execompte-web
       npm install
-    command: >
-      npm install -g @angular/cli &&
-      ng analytics off &&
+    command: |
+      cd ./execompte-api
+      npm install -g @angular/cli
+      ng analytics off
       ng serve --proxy-config proxy.config.json --host 0.0.0.0 --disable-host-check --port 4200
   - init: |
       cd ./execompte-api
       mvn clean install -Dmaven.test.skip=true
-    command: >
-      mkdir -p /workspace/data &&
-      #start mongod without auth to create user
-      mongod --dbpath /workspace/data &&
-      #start mongod WITH auth (after shutdown below)
-      mongod --auth --dbpath /workspace/data
-  - command: >
-      gp await-port 27017 &&
-      cd ./execompte-api &&
-      #create user
-      mongo execompte_db --host localhost --eval "db.createUser({user: 'tamboyah', pwd: '_tadidi', roles: [{role: 'userAdminAnyDatabase', db: 'admin'}]});" &&
-      #shutdown mongod
-      mongo execompte_db --host localhost --eval "db.adminCommand( { shutdown: 1 } );" &&
-      #Wait for mongod
-      gp await-port 27017 &&
-      #run spring-boot
+  - command: |
+      cd ./execompte-api      
+      gp await-port 27017
       mvn spring-boot:run
 ports:
   - port: 27017
