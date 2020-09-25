@@ -21,11 +21,13 @@ tasks:
   - init: |
       cd ./execompte-api
       mvn clean install -Dmaven.test.skip=true
-      /workspace/ExeCompte/setup.sh
-      gp sync-done SETUP
+      /workspace/ExeCompte/startMongoDbOn27015.sh  
   - command: |
-      gp sync-await SETUP
-      mkdir -p /workspace/data
+      gp await-port 27015
+      /workspace/ExeCompte/createMongoDbUser.sh
+      gp sync-done MONGO_STOP_AFTER_USER_CREATION
+  - command: |
+      gp sync-await MONGO_STOP_AFTER_USER_CREATION
       mongod --auth --port 27017 --dbpath /workspace/data
   - command: |
       gp await-port 27017
