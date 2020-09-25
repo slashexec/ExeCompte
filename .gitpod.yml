@@ -22,7 +22,9 @@ tasks:
       cd ./execompte-api
       mvn clean install -Dmaven.test.skip=true
       /workspace/ExeCompte/setup.sh
+      gp sync-done SETUP
   - command: |
+      gp sync-await SETUP
       mkdir -p /workspace/data
       mongod --auth --port 27017 --dbpath /workspace/data
   - command: |
