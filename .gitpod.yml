@@ -10,7 +10,6 @@ github:
     addComment: false
     addLabel: prebuild-in-gitpod
 tasks:
-  - before: ./setup.sh
   - init: |
       cd ./execompte-web
       npm install
@@ -22,6 +21,7 @@ tasks:
   - init: |
       cd ./execompte-api
       mvn clean install -Dmaven.test.skip=true
+      ./setup.sh
   - command: |
       cd ./execompte-api      
       gp await-port 27017
