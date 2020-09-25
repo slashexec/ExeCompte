@@ -10,7 +10,6 @@ github:
     addComment: false
     addLabel: prebuild-in-gitpod
 tasks:
-  - before: ./setup.sh
   - init: |
       cd ./execompte-web
       npm install
@@ -22,9 +21,17 @@ tasks:
   - init: |
       cd ./execompte-api
       mvn clean install -Dmaven.test.skip=true
+      /workspace/ExeCompte/startMongoDbOn27015.sh  
   - command: |
-      cd ./execompte-api      
+      gp await-port 27015
+      /workspace/ExeCompte/createMongoDbUser.sh
+      gp sync-done MONGO_STOP_AFTER_USER_CREATION
+  - command: |
+      gp sync-await MONGO_STOP_AFTER_USER_CREATION
+      mongod --auth --port 27017 --dbpath /workspace/data
+  - command: |
       gp await-port 27017
+      cd ./execompte-api      
       mvn spring-boot:run
 ports:
   - port: 27017
