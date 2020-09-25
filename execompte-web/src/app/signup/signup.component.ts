@@ -35,6 +35,9 @@ export class SignupComponent implements OnInit {
             console.log(response.body['id']);
             console.log(response.headers.get('location'));
             //this.router.navigate(['company', response.body.id ]);
+          },
+          error =>{
+          this.errorMessage= 'An error occured, please retry later';
           }
         );
 

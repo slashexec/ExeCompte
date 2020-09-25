@@ -35,43 +35,43 @@ export class ActivityReport {
   providedIn: 'root'
 })
 export class ActivityReportDataService {
-
+  apiUrl =`https://4200-c4fb21c2-9271-4845-8037-38cf0ae44765.ws-eu01.gitpod.io`;
   constructor(
     private http:HttpClient
   ) { }
 
   getAllActivityReportsService(username) {
-    return this.http.get<ActivityReport[]>(`http://localhost:4200/api/users/${username}/activityreports`);
+    return this.http.get<ActivityReport[]>(`${this.apiUrl}/api/users/${username}/activityreports`);
   }
 
   getActivityReportService(username, id) {
-    return this.http.get<ActivityReport>(`http://localhost:4200/api/users/${username}/activityreports/${id}`);
+    return this.http.get<ActivityReport>(`${this.apiUrl}/api/users/${username}/activityreports/${id}`);
   }
 
 
   deleteActivityReport(username, id) {
-    return this.http.delete (`http://localhost:4200/api/users/${username}/activityreports/${id}`);
+    return this.http.delete (`${this.apiUrl}/api/users/${username}/activityreports/${id}`);
   }
 
   editActivityReport(username, id) {
-    return this.http.get<ActivityReport[]>(`http://localhost:4200/api/users/${username}/activityreports/${id}`);
+    return this.http.get<ActivityReport[]>(`${this.apiUrl}/api/users/${username}/activityreports/${id}`);
   }
 
   updateActivityReport(username, id, activityReport) {
-    return this.http.put(`http://localhost:4200/api/users/${username}/activityreports/${id}`, activityReport);
+    return this.http.put(`${this.apiUrl}/api/users/${username}/activityreports/${id}`, activityReport);
   }
 
   createActivityReport(username, activityReport) {
-    return this.http.post(`http://localhost:4200/api/users/${username}/activityreports`, activityReport);
+    return this.http.post(`${this.apiUrl}/api/users/${username}/activityreports`, activityReport);
   }
 
   billActivityReport(username, id, activityReport) {
 
-    return this.http.put(`http://localhost:4200/api/users/${username}/activityreports/${id}/billing`, activityReport);
+    return this.http.put(`${this.apiUrl}/api/users/${username}/activityreports/${id}/billing`, activityReport);
   }
 
   downloadActivityReportBilling(username, id) {
-    return this.http.get<Blob>(`http://localhost:4200/api/users/${username}/activityreports/${id}/billing/download`,
+    return this.http.get<Blob>(`${this.apiUrl}/api/users/${username}/activityreports/${id}/billing/download`,
     { observe: 'response', responseType: 'blob' as 'json' });
   }
 }

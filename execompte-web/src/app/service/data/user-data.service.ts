@@ -59,15 +59,15 @@ export class User {
   providedIn: 'root'
 })
 export class UserDataService {
-
+apiUrl =`https://4200-c4fb21c2-9271-4845-8037-38cf0ae44765.ws-eu01.gitpod.io`;
   constructor(private http:HttpClient) { }
 
   signup(signUpInfo: SignUpInfo) {
-    return this.http.post(`http://localhost:4200/api/users`, signUpInfo,
+    return this.http.post(`${this.apiUrl}/api/users`, signUpInfo,
     { observe: 'response', responseType: 'json'});
   }
 
   updateUserCompany(username, company: Company) {
-    return this.http.put(`http://localhost:4200/api/users/${username}`, company);
+    return this.http.put(`${this.apiUrl}/api/users/${username}`, company);
   }
 }

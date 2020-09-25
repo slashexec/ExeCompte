@@ -23,7 +23,7 @@ import com.slashexec.facturation.model.User;
 import com.slashexec.facturation.model.SignUpInfo;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://4200-c4fb21c2-9271-4845-8037-38cf0ae44765.ws-eu01.gitpod.io")
 public class UserController {
 	
 	@Autowired
