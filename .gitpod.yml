@@ -21,10 +21,13 @@ tasks:
   - init: |
       cd ./execompte-api
       mvn clean install -Dmaven.test.skip=true
-      ./setup.sh
+      /workspace/ExeCompte/setup.sh
   - command: |
-      cd ./execompte-api      
+      mkdir -p /workspace/data
+      mongod --auth --port 27017 --dbpath /workspace/data
+  - command: |
       gp await-port 27017
+      cd ./execompte-api      
       mvn spring-boot:run
 ports:
   - port: 27017
