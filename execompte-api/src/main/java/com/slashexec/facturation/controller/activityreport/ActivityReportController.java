@@ -24,7 +24,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.slashexec.facturation.model.ActivityReport;
 
 @RestController
-@CrossOrigin(origins = "https://4200-c4fb21c2-9271-4845-8037-38cf0ae44765.ws-eu01.gitpod.io")
+//@CrossOrigin(origins = "https://4200-c4fb21c2-9271-4845-8037-38cf0ae44765.ws-eu01.gitpod.io")
+@CrossOrigin(origins = "${client.url}")
 public class ActivityReportController {
 
 	@Autowired
