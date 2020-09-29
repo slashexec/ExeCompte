@@ -14,7 +14,7 @@ tasks:
       cd ./execompte-web
       npm install
     command: |
-      cd ./execompte-api
+      cd ./execompte-web
       npm install -g @angular/cli
       ng analytics off
       ng serve --proxy-config proxy.config.json --host 0.0.0.0 --disable-host-check --port 4200
@@ -32,7 +32,7 @@ tasks:
   - command: |
       gp await-port 27017
       cd ./execompte-api      
-      mvn spring-boot:run
+      mvn spring-boot:run -Dspring-boot.run.arguments=--client.url=$(gp url 4200)
 ports:
   - port: 27017
     onOpen: ignore
