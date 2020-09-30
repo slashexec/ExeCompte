@@ -17,7 +17,7 @@ tasks:
       cd ./execompte-web
       npm install -g @angular/cli
       ng analytics off
-      ng serve --proxy-config proxy.config.json --host 0.0.0.0 --disable-host-check --port 4200
+      export PRODUCTION=false; export API_URL=$(gp url 4200); export PLATFORM=GITPOD_DEV; export PORT=4200; npm start
   - init: |
       cd ./execompte-api
       mvn clean install -Dmaven.test.skip=true
