@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 
 export class PeriodDay {
@@ -35,7 +36,9 @@ export class ActivityReport {
   providedIn: 'root'
 })
 export class ActivityReportDataService {
-  apiUrl =`https://4200-c4fb21c2-9271-4845-8037-38cf0ae44765.ws-eu01.gitpod.io`;
+
+  apiUrl = environment.apiUrl;
+
   constructor(
     private http:HttpClient
   ) { }

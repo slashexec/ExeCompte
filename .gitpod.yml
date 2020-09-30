@@ -14,10 +14,10 @@ tasks:
       cd ./execompte-web
       npm install
     command: |
-      cd ./execompte-api
+      cd ./execompte-web
       npm install -g @angular/cli
       ng analytics off
-      ng serve --proxy-config proxy.config.json --host 0.0.0.0 --disable-host-check --port 4200
+      export PRODUCTION=false; export API_URL=$(gp url 4200); export PLATFORM=GITPOD_DEV; export PORT=4200; npm start
   - init: |
       cd ./execompte-api
       mvn clean install -Dmaven.test.skip=true
@@ -31,8 +31,8 @@ tasks:
       mongod --auth --port 27017 --dbpath /workspace/data
   - command: |
       gp await-port 27017
-      cd ./execompte-api      
-      mvn spring-boot:run
+      cd ./execompte-api
+      mvn spring-boot:run -Dspring-boot.run.arguments=--client.url=$(gp url 4200)
 ports:
   - port: 27017
     onOpen: ignore

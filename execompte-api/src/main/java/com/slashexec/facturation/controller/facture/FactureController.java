@@ -19,7 +19,8 @@ import com.slashexec.facturation.service.FacturationService;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "${client.url}")
 @RequestMapping("/facture")
 public class FactureController {
 	
