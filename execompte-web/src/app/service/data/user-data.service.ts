@@ -60,7 +60,9 @@ export class User {
   providedIn: 'root'
 })
 export class UserDataService {
+
   apiUrl = environment.apiUrl;
+
   constructor(private http:HttpClient) { }
 
   signup(signUpInfo: SignUpInfo) {

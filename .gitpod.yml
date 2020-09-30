@@ -31,7 +31,7 @@ tasks:
       mongod --auth --port 27017 --dbpath /workspace/data
   - command: |
       gp await-port 27017
-      cd ./execompte-api      
+      cd ./execompte-api
       mvn spring-boot:run -Dspring-boot.run.arguments=--client.url=$(gp url 4200)
 ports:
   - port: 27017

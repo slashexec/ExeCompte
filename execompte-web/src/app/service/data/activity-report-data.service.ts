@@ -38,6 +38,7 @@ export class ActivityReport {
 export class ActivityReportDataService {
 
   apiUrl = environment.apiUrl;
+
   constructor(
     private http:HttpClient
   ) { }
