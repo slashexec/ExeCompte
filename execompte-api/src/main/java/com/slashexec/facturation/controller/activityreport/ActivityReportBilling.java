@@ -113,10 +113,10 @@ public class ActivityReportBilling {
 			PdfFont helveticaFont = PdfFontFactory.createFont(StandardFonts.HELVETICA);
 			PdfFont helveticaBoldFont = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
 			Paragraph p = new Paragraph();
-			p.add(new Text("ALLEGIS GROUP SAS" + '\n').setFont(helveticaBoldFont));
-			p.add(new Text("6 RUE DARU" + '\n').setFont(helveticaFont));
-			p.add(new Text("75008 PARIS 8" + '\n').setFont(helveticaFont));
-			p.add(new Text("TVA FR67499449494" + '\n').setFont(helveticaBoldFont));
+			p.add(new Text("MATEN" + '\n').setFont(helveticaBoldFont));
+			p.add(new Text("20, RUE JOUBERT" + '\n').setFont(helveticaFont));
+			p.add(new Text("75009 PARIS" + '\n').setFont(helveticaFont));
+			p.add(new Text("TVA FR91398368324" + '\n').setFont(helveticaBoldFont));
 
 			Table table = new Table(1).useAllAvailableWidth();
 			Cell cell = new Cell();
@@ -149,7 +149,9 @@ public class ActivityReportBilling {
 			//Date edition FORMAT_DD_MM_YYYY
 			Calendar editionDate = Calendar.getInstance();
 			editionDate.setTime(periodCalendar.getTime());
-			editionDate.add(Calendar.MONTH, 1);
+            editionDate.add(Calendar.MONTH, 1); // = 1er jour du mois suivant
+            //date edition au dernier jour de la période facturée
+            editionDate.add(Calendar.DAY_OF_MONTH, -1);
 			
 			Cell cell2 = new Cell();
 			cell2.add(new Paragraph(new Text("En date du " + FORMAT_DD_MM_YYYY.format(editionDate.getTime()))));
@@ -158,8 +160,8 @@ public class ActivityReportBilling {
 			cell2.setBorder(Border.NO_BORDER);
 			table.addCell(cell2);
 
-			//Date Echéance (15 jours)
-			editionDate.add(Calendar.DAY_OF_MONTH, 14);
+			//Date Echéance (50 jours)
+			editionDate.add(Calendar.DAY_OF_MONTH, 49);
 			Cell cell3 = new Cell();
 			cell3.add(new Paragraph(new Text("Echéance le "+ FORMAT_DD_MM_YYYY.format(editionDate.getTime()) )));
 			cell3.setPadding(0);
@@ -444,7 +446,7 @@ public class ActivityReportBilling {
 			table.addCell(new Cell().add(new Paragraph(new Text("                    " + '\n'))).setBorder(Border.NO_BORDER));
 
 			Cell cell2Value = new Cell();
-			cell2Value.add(new Paragraph(new Text("15 jours").setFontSize(8)));
+			cell2Value.add(new Paragraph(new Text("50 jours").setFontSize(8)));
 			cell2Value.setPadding(0);
 			cell2Value.setTextAlignment(TextAlignment.LEFT);
 			cell2Value.setVerticalAlignment(VerticalAlignment.BOTTOM);
