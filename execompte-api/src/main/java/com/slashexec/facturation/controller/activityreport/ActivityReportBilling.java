@@ -40,7 +40,6 @@ public class ActivityReportBilling {
 	SimpleDateFormat FORMAT_DD_MM_YYYY = new SimpleDateFormat("dd/MM/yyyy");
 	
 	static final String UNIT = "jour";
-	static final double PRIX_HT_UNITAIRE = 380;
 //	static final String FOOTER_STRING = "EURL au capital 100 Euros - SIREN 851246629 - RCS Rennes - N° de TVA intracommunautaire FR44851246629";
 	static final String HEADER_STRING = "";
 	
@@ -79,7 +78,7 @@ public class ActivityReportBilling {
 			addEntrepriseAddress(doc);
 			addClientAddress(doc);
 			addTitles(doc, FACTURE_REF, periodCalendar);
-			addPrestationTable(activityReport.getPrestation(), doc);
+			addPrestationTable(activityReport, doc);
 			addSummary(doc);
 			addCoordonneesBancaires(doc);
 			addConditionsGles(doc);
@@ -161,7 +160,7 @@ public class ActivityReportBilling {
 			table.addCell(cell2);
 
 			//Date Echéance (50 jours)
-			editionDate.add(Calendar.DAY_OF_MONTH, 49);
+			editionDate.add(Calendar.DAY_OF_MONTH, 50);
 			Cell cell3 = new Cell();
 			cell3.add(new Paragraph(new Text("Echéance le "+ FORMAT_DD_MM_YYYY.format(editionDate.getTime()) )));
 			cell3.setPadding(0);
@@ -176,7 +175,7 @@ public class ActivityReportBilling {
 			doc.add(table);
 		}
 
-		private void addPrestationTable(String prestation, Document doc) throws IOException {
+		private void addPrestationTable(ActivityReport activityReport, Document doc) throws IOException {
 			Table table = new Table(UnitValue.createPercentArray(7)).useAllAvailableWidth();
 			String[] tableTitles = new String[] {"Prestation", "Quantité", "Unité", "Prix HT", "Total HT", "TVA", "Total TTC"};
 
@@ -186,7 +185,7 @@ public class ActivityReportBilling {
 
 			Cell projet = new Cell(1, 7);
 //			projet.add(new Paragraph("Abdoulaye DRAME - Projet OpenStat AtoS"));
-			projet.add(new Paragraph(prestation));
+			projet.add(new Paragraph(activityReport.getPrestation()));
 			projet.setBorderBottom(Border.NO_BORDER);
 			projet.setBorderLeft(Border.NO_BORDER);
 			projet.setBorderRight(Border.NO_BORDER);
@@ -204,7 +203,7 @@ public class ActivityReportBilling {
 			table.addCell(periodCell.setFontColor(ColorConstants.BLUE));
 			table.addCell( createCellWithNoBorder(""+ NB_JOURS).setFontColor(ColorConstants.BLUE));
 			table.addCell( createCellWithNoBorder(UNIT).setFontColor(ColorConstants.BLUE));
-			table.addCell(createCellWithNoBorder( PRIX_HT_UNITAIRE + " €").setFontColor(ColorConstants.BLUE));
+			table.addCell(createCellWithNoBorder( activityReport.getUnitPrice() + " €").setFontColor(ColorConstants.BLUE));
 
 			table.addCell(createCellWithNoBorder( TOTAL_HT + " €").setFontColor(ColorConstants.BLUE));
 			table.addCell(createCellWithNoBorder( TVA + " %").setFontColor(ColorConstants.BLUE));
