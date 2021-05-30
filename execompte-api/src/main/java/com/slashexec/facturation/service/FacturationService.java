@@ -41,7 +41,7 @@ public class FacturationService {
 	static final String UNIT = "jour";
 	static final double NB_JOURS = 20;
 	static final double PRIX_HT_UNITAIRE = 380;
-	static final String FOOTER_STRING = "EURL au capital 100 Euros - SIREN 851246629 - RCS Rennes - N° de TVA intracommunautaire FR44851246629";
+	static final String FOOTER_STRING = "SASU au capital 100 Euros - SIREN 851246629 - RCS Rennes - N° de TVA intracommunautaire FR44851246629";
 	static final String HEADER_STRING = "";
 	
 	//******************************************************************

@@ -70,7 +70,7 @@ public class ActivityReportBilling {
 			PdfFont helveticaFont = PdfFontFactory.createFont(StandardFonts.HELVETICA);
 			PdfFont helveticaBoldFont = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
 
-			FactureFooter factureFooter = new FactureFooter("EURL", "851246629", "RENNES", "FR44851246629", 100, helveticaBoldFont, helveticaFont, 5);
+			FactureFooter factureFooter = new FactureFooter("SASU", "851246629", "RENNES", "FR44851246629", 100, helveticaBoldFont, helveticaFont, 5);
 
 			pdfDoc.addEventHandler(PdfDocumentEvent.END_PAGE, new TextFooterEventHandler(doc, factureFooter));
 
